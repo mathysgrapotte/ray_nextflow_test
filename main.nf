@@ -23,19 +23,17 @@ include { RAY_NEXTFLOW_TEST  } from './workflows/ray_nextflow_test'
 //
 // WORKFLOW: Run main analysis pipeline depending on type of input
 //
-workflow MATHYSGRAPOTTE_RAY_NEXTFLOW_TEST {
-
-    take:
-    samplesheet // channel: samplesheet read in from --input
+workflow RAY_NEXTFLOW_TEST_WF {
 
     main:
 
     //
     // WORKFLOW: Run pipeline
     //
-    RAY_NEXTFLOW_TEST (
-        samplesheet
-    )
+    RAY_NEXTFLOW_TEST()
+
+    emit:
+    ray_logs = RAY_NEXTFLOW_TEST.out.ray_logs
 }
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -50,9 +48,7 @@ workflow {
     //
     // WORKFLOW: Run main workflow
     //
-    MATHYSGRAPOTTE_RAY_NEXTFLOW_TEST (
-        params.input
-    )
+    RAY_NEXTFLOW_TEST_WF()
 }
 
 /*

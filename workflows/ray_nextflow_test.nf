@@ -4,6 +4,8 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
+include { RAY_CLUSTER_START_AND_LOG } from '../modules/ray_cluster_start_and_log'
+
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     RUN MAIN WORKFLOW
@@ -12,8 +14,11 @@
 
 workflow RAY_NEXTFLOW_TEST {
 
-    take:
-    ch_samplesheet // channel: samplesheet read in from --input
+    main:
+    RAY_CLUSTER_START_AND_LOG()
+
+    emit:
+    ray_logs = RAY_CLUSTER_START_AND_LOG.out.ray_logs
 }
 
 /*
